@@ -19,16 +19,36 @@ public class Player {                                   //mova up/down by 2, L/R
 
     public void move(MoveEnum m){
         switch(m){
-            case UP: playerY -= 1;
+            case UP:
+                if (!(Map.generatedMap.get(playerY - 1).get(playerX).equals(Map.top))){
+                    playerY -= 1;
+                    playerDraw();
+                }
             break;
-            case DOWN: playerY += 1;
+            case DOWN:
+                if(playerY != Map.generatedMap.size()){
+                    if (Map.generatedMap.get(playerY + 1).get(playerX).equals(Map.block)) {
+                        playerY += 1;
+                        playerDraw();
+                    }
+            }
             break;
-            case LEFT: playerX -= 1;
+            case LEFT:
+                if(playerX != 0) {
+                    if (Map.generatedMap.get(playerY).get(playerX - 1).equals(Map.block)){
+                        playerX -= 1;
+                        playerDraw();
+                    }
+                }
             break;
-            case RIGHT: playerX += 1;
+            case RIGHT: if(playerX != Map.generatedMap.get(playerY).size()) {
+                if (Map.generatedMap.get(playerY).get(playerX + 1).equals(Map.block)){
+                    playerX += 1;
+                    playerDraw();
+                }
+            }
             break;
         }
-        playerDraw();
     }
     public int getPlayerX() {                           //get PlayerX
         return playerX;

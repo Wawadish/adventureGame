@@ -10,14 +10,20 @@ public class Main {
         map.generate();  //generating the map
         BattleEntity player = new BattleEntity(20, 5, 5, 10, 5, true);
         BattleEntity enemy1 = new BattleEntity(player);
-        map.draw();  //displaying the map
         player.battle(enemy1);
         Player player1 = new Player();
         Controller controller = new Controller(player1);
+        map.draw();  //displaying the map
     }
     public static void clear(){
-        for(int i = 0; i < 50; i++){
-            System.out.println();
+        try
+        {
+            Runtime.getRuntime().exec("cmd /c cls");
         }
+        catch(final Exception e)
+        {
+            System.out.print(e);
+        }
+
     }
 }

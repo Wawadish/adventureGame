@@ -1,4 +1,4 @@
 package com.company;
 
-public enum MoveEnum { UP, DOWN, LEFT, RIGHT
+public enum MoveEnum { UP, DOWN, LEFT, RIGHT, NULL
 }
