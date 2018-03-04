@@ -10,43 +10,54 @@ public class Player {                                   //mova up/down by 2, L/R
     public Player() {
         this.playerX = 0;
         this.playerY = 1;
+        playerDraw();
     }
 
     public Player(int playerX, int playerY) {           //generate a player at playerX, playerY
         this.playerX = playerX;
         this.playerY = playerY;
+        playerDraw();
     }
-
+    public static boolean didMove = false;
     public void move(MoveEnum m){
         switch(m){
             case UP:
                 if (!(Map.generatedMap.get(playerY - 1).get(playerX).equals(Map.top))){
-                    playerY -= 1;
+                    playerY--;
                     playerDraw();
+                    didMove = true;
                 }
             break;
             case DOWN:
-                if(playerY != Map.generatedMap.size()){
-                    if (Map.generatedMap.get(playerY + 1).get(playerX).equals(Map.block)) {
-                        playerY += 1;
-                        playerDraw();
+                if(playerY != Map.generatedMap.size() - 1) {
+                    try {
+                        if (Map.generatedMap.get(playerY + 1).get(playerX).equals(Map.block)) {
+                            playerY++;
+                            playerDraw();
+                            didMove = true;
+                        }
+                    }catch(Exception e){
+
                     }
-            }
+                }
             break;
             case LEFT:
                 if(playerX != 0) {
                     if (Map.generatedMap.get(playerY).get(playerX - 1).equals(Map.block)){
-                        playerX -= 1;
+                        playerX--;
                         playerDraw();
+                        didMove = true;
                     }
                 }
             break;
-            case RIGHT: if(playerX != Map.generatedMap.get(playerY).size()) {
-                if (Map.generatedMap.get(playerY).get(playerX + 1).equals(Map.block)){
-                    playerX += 1;
-                    playerDraw();
+            case RIGHT:
+                if(playerX != Map.generatedMap.get(playerY).size()-1) {
+                    if (Map.generatedMap.get(playerY).get(playerX + 1).equals(Map.block)){
+                        playerX++;
+                        playerDraw();
+                        didMove = true;
+                    }
                 }
-            }
             break;
         }
     }
@@ -72,14 +83,18 @@ public class Player {                                   //mova up/down by 2, L/R
 
     public ArrayList<ArrayList<String>> changeMap(ArrayList<ArrayList<String>> listMap){
         listMap.get(playerY).set(playerX, "|_X_|");
-
         return listMap;
     }
+
 
     public void playerDraw(){
         Main.clear();
         changeMap(Map.generatedMap);
         Map.draw();
         Map.generatedMap.get(playerY).set(playerX, "|___|");
+        for (int i = 0; i < Main.enemyList.size(); i++) {
+            Map.generatedMap.get(Main.enemyList.get(i).getEnemyY()).set(Main.enemyList.get(i).getEnemyX(), "|___|");
+        }
+        didMove=true;
     }
 }
