@@ -5,9 +5,10 @@ import java.util.ArrayList;
 public class Map {
 
     private String top = " ___ ";
-    private String block = "|___|";    //I seperated blocks into tops and blocks, it was easier to deal with.
+    private String block = "|___|";
+    private String palyer = "|_X_|";                         //I seperated blocks into tops and blocks, it was easier to deal with.
 
-    private ArrayList<ArrayList<String>> generatedMap = new ArrayList<>();  //this is the two dimensional array list from which the map is drawn.
+    public ArrayList<ArrayList<String>> generatedMap = new ArrayList<>();  //this is the two dimensional array list from which the map is drawn.
 
     public void generate(){                                           //this method the generates map
         for(int y =0; y < Math.random()*11+4; y++) {  //from 4 to 15 rows (horizontal)
@@ -57,5 +58,13 @@ public class Map {
     public ArrayList<String> getRow(int rowNumber, ArrayList<ArrayList<String>> tempMap){  //this method uses the two dimensional arraylist (the map), and return the arraylist at the i position, for practical use only.
         ArrayList<String> a = tempMap.get(rowNumber);
         return a;
+    }
+
+    public void setGeneratedMap(ArrayList<ArrayList<String>> generatedMap){
+        this.generatedMap = generatedMap;
+    }
+
+    public ArrayList<ArrayList<String>> getGeneratedMap(){
+        return this.generatedMap;
     }
 }
