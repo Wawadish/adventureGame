@@ -12,5 +12,12 @@ public class Main {
         BattleEntity enemy1 = new BattleEntity(player);
         map.draw();  //displaying the map
         player.battle(enemy1);
+        Player player1 = new Player();
+        Controller controller = new Controller(player1);
+    }
+    public static void clear(){
+        for(int i = 0; i < 50; i++){
+            System.out.println();
+        }
     }
 }
