@@ -1,8 +1,6 @@
 package com.company;
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
-
 import java.lang.IllegalArgumentException;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 public class Player {                                   //mova up/down by 2, L/R by
@@ -19,20 +17,36 @@ public class Player {                                   //mova up/down by 2, L/R
         this.playerY = playerY;
     }
 
-    public  void moveUp() {                             //every time this is used, playerY reduces by 1, player go up
+    public void moveUp() {                             //every time this is used, playerY reduces by 1, player go up
         playerY -= 1;
+        Map.draw();
+        changeMap(Map.generatedMap);
+        Map.draw();
+        Map.generatedMap.get(playerY).set(playerX, "|___|");
     }
 
-    public  void moveDown() {                           //every time this is used, playerY increases by 1, player go down
+    public void moveDown() {                           //every time this is used, playerY increases by 1, player go down
         playerY += 1;
+        Map.draw();
+        changeMap(Map.generatedMap);
+        Map.draw();
+        Map.generatedMap.get(playerY).set(playerX, "|___|");
     }
 
-    public  void moveLeft() {                           //every time this is used, playerX reduces by 4, player go left
+    public void moveLeft() {                           //every time this is used, playerX reduces by 4, player go left
         playerX -= 1;
+        Map.draw();
+        changeMap(Map.generatedMap);
+        Map.draw();
+        Map.generatedMap.get(playerY).set(playerX, "|___|");
     }
 
-    public  void moveRight() {                          //every time this is used, playerX increases by 4, player go right
+    public void moveRight() {                          //every time this is used, playerX increases by 4, player go right
         playerX += 1;
+        Map.draw();
+        changeMap(Map.generatedMap);
+        Map.draw();
+        Map.generatedMap.get(playerY).set(playerX, "|___|");
     }
 
     public int getPlayerX() {                           //get PlayerX
@@ -55,13 +69,9 @@ public class Player {                                   //mova up/down by 2, L/R
        }
     }
 
-    public ArrayList<ArrayList<String>> changeMap(Map map){
-        ArrayList<ArrayList<String>> tempMap = map.getGeneratedMap();
-        Map newMap = new Map();
+    public ArrayList<ArrayList<String>> changeMap(ArrayList<ArrayList<String>> listMap){
+        listMap.get(playerY).set(playerX, "|_X_|");
 
-        tempMap.get(playerY).set(playerX, "|_X_|");
-        //newMap.setGeneratedMap(tempMap);
-
-        return tempMap;
+        return listMap;
     }
 }

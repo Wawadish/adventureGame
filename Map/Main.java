@@ -8,11 +8,9 @@ public class Main {
         map.draw();  //displaying the map
 
         Player player = new Player();
-
-        player.moveDown();
-        player.moveRight();
-        player.setPlayerPosition(3,5);
-        map.setGeneratedMap(player.changeMap(map));
+        player.changeMap(Map.generatedMap);
         map.draw();
+
+        Controller controller = new Controller(player);
     }
 }

@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class Map {
 
     private String top = " ___ ";
-    private String block = "|___|";
-    private String palyer = "|_X_|";                         //I seperated blocks into tops and blocks, it was easier to deal with.
+    private String block = "|___|";     //I seperated blocks into tops and blocks, it was easier to deal with.
 
-    public ArrayList<ArrayList<String>> generatedMap = new ArrayList<>();  //this is the two dimensional array list from which the map is drawn.
+    public static ArrayList<ArrayList<String>> generatedMap = new ArrayList<>();  //this is the two dimensional array list from which the map is drawn.
 
     public void generate(){                                           //this method the generates map
         for(int y =0; y < Math.random()*11+4; y++) {  //from 4 to 15 rows (horizontal)
@@ -43,7 +42,7 @@ public class Map {
         System.out.println("The number of columns starting from 0 : " + columnsCount);
     }
 
-    public void draw(){
+    public static void draw(){
         for(int i = 0; i < generatedMap.size(); i++) {                              //this method draws the map in the console.
             for (int column = 0; column < getRow(i, generatedMap).size(); column++){
                 if(column != getRow(i, generatedMap).size()-1) {
@@ -55,7 +54,7 @@ public class Map {
         }
     }
 
-    public ArrayList<String> getRow(int rowNumber, ArrayList<ArrayList<String>> tempMap){  //this method uses the two dimensional arraylist (the map), and return the arraylist at the i position, for practical use only.
+    public static ArrayList<String> getRow(int rowNumber, ArrayList<ArrayList<String>> tempMap){  //this method uses the two dimensional arraylist (the map), and return the arraylist at the i position, for practical use only.
         ArrayList<String> a = tempMap.get(rowNumber);
         return a;
     }
