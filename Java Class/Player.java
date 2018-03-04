@@ -16,6 +16,7 @@ public class Player {                                   //mova up/down by 2, L/R
     public Player(int playerX, int playerY) {           //generate a player at playerX, playerY
         this.playerX = playerX;
         this.playerY = playerY;
+        changeMap(Map.generatedMap);
         playerDraw();
     }
     public static boolean didMove = false;
@@ -27,6 +28,9 @@ public class Player {                                   //mova up/down by 2, L/R
                     playerDraw();
                     didMove = true;
                 }
+                if(checkBattle()){
+                    System.exit(0);
+                }
             break;
             case DOWN:
                 if(playerY != Map.generatedMap.size() - 1) {
@@ -35,6 +39,9 @@ public class Player {                                   //mova up/down by 2, L/R
                             playerY++;
                             playerDraw();
                             didMove = true;
+                        }
+                        if(checkBattle()){
+                            System.exit(0);
                         }
                     }catch(Exception e){
 
@@ -48,6 +55,9 @@ public class Player {                                   //mova up/down by 2, L/R
                         playerDraw();
                         didMove = true;
                     }
+                    if(checkBattle()){
+                        System.exit(0);
+                    }
                 }
             break;
             case RIGHT:
@@ -56,6 +66,9 @@ public class Player {                                   //mova up/down by 2, L/R
                         playerX++;
                         playerDraw();
                         didMove = true;
+                    }
+                    if(checkBattle()){
+                        System.exit(0);
                     }
                 }
             break;
@@ -69,20 +82,11 @@ public class Player {                                   //mova up/down by 2, L/R
         return playerY;
     }
 
-    public void setPlayerPosition(int x,int y) {        //set player Postion to entered x,y, ex: (1,2) will put the player in the 1st column for left, 2nd row from top
-       try {                                            //don't enter the index of string, enter the nubmer of block
-           if (x <= 0 || y <= 0) throw new IllegalArgumentException();
-           playerX = x-1;
-           playerY = y;
-       }catch(IllegalArgumentException e) {
-           System.out.println("value entered must be an int bigger to 0");
-       }catch(Exception e) {
-            e.printStackTrace();
-       }
-    }
-
     public ArrayList<ArrayList<String>> changeMap(ArrayList<ArrayList<String>> listMap){
         listMap.get(playerY).set(playerX, "|_X_|");
+        for (int i = 0; i < Main.enemyList.size(); i++) {
+            Map.generatedMap.get(Main.enemyList.get(i).getEnemyY()).set(Main.enemyList.get(i).getEnemyX(), "|_E_|");
+        }
         return listMap;
     }
 
@@ -96,5 +100,37 @@ public class Player {                                   //mova up/down by 2, L/R
             Map.generatedMap.get(Main.enemyList.get(i).getEnemyY()).set(Main.enemyList.get(i).getEnemyX(), "|___|");
         }
         didMove=true;
+    }
+
+    public boolean checkBattle() {
+        for (int i = 0; i < Main.enemyList.size(); i++) {
+            if ((playerX == Main.enemyList.get(i).enemyX)&&(playerY == Main.enemyList.get(i).enemyY)) {
+                System.out.println("Battle initiated.");
+                return true;
+            }
+        }
+        if ((mapPosition(1, 0) == Map.enemy)) {
+            System.out.println("Battle initiated");
+            return true;
+        } else if ((mapPosition(-1, 0) == Map.enemy)) {
+            System.out.println("Battle initiated");
+            return true;
+        } else if ((mapPosition(0, 1) == Map.enemy)) {
+            System.out.println("Battle initiated");
+            return true;
+        } else if ((mapPosition(0, -1) == Map.enemy)) {
+            System.out.println("Battle initiated");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String mapPosition(int incrementY, int incrementX){
+        try {
+            return Map.generatedMap.get(playerY + incrementY).get(playerX + incrementX);
+        }catch (Exception e){
+            return "a random string";
+        }
     }
 }

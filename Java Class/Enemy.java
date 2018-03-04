@@ -87,17 +87,6 @@ public class Enemy {                                   //mova up/down by 2, L/R 
         return enemyY;
     }
 
-    public void setEnemyPosition(int x,int y) {        //set player Postion to entered x,y, ex: (1,2) will put the player in the 1st column for left, 2nd row from top
-        try {                                            //don't enter the index of string, enter the nubmer of block
-            if (x <= 0 || y <= 0) throw new IllegalArgumentException();
-            enemyX = x-1;
-            enemyY = y;
-        }catch(IllegalArgumentException e) {
-            System.out.println("value entered must be an int bigger than 0");
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public ArrayList<ArrayList<String>> changeMap(ArrayList<ArrayList<String>> listMap){
         listMap.get(enemyY).set(enemyX, "|_E_|");
@@ -107,7 +96,6 @@ public class Enemy {                                   //mova up/down by 2, L/R 
 
     public void playerDraw(){
         changeMap(Map.generatedMap);
-        //Map.generatedMap.get(enemyY).set(enemyX, "|___|");
     }
 
 }

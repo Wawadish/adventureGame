@@ -6,6 +6,8 @@ public class Map {
 
     public static final String top = " ___ ";
     public static final String block = "|___|";    //I seperated blocks into tops and blocks, it was easier to deal with.
+    public static final String enemy = "|_E_|";
+    public static final String player = "|_X_|";
 
     public static ArrayList<ArrayList<String>> generatedMap = new ArrayList<>();  //this is the two dimensional array list from which the map is drawn.
 
